@@ -46,7 +46,7 @@ public class Main {
             }
             case "0" -> sc.close();
             default -> {
-                System.err.println("Invalid input. Try again");
+                System.err.println("Invalid input. Try again.");
                 main(args);
             }
         }
