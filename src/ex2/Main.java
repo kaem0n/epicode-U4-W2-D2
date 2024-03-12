@@ -9,34 +9,38 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        try {
-            System.out.println();
-            System.out.println("INSERT LENGTH VALUE:");
-            int length = Integer.parseInt(sc.nextLine());
-            if (length > 0) {
-            System.out.println("You typed: " + length);
-                ArrayList<Integer> numbers = createArrayOfInt(length);
-                doubledArrayOfInt(numbers);
+        loop: while (true) {
+            try {
                 System.out.println();
-                System.out.println("CHOOSE AN OPTION:");
-                System.out.println("1. Print numbers with even indexes");
-                System.out.println("2. Print numbers with odd indexes");
-                String input = sc.nextLine();
-                switch (input) {
-                    case "1" -> printEvenOddIndex(numbers, true);
-                    case "2" -> printEvenOddIndex(numbers, false);
-                    default -> {
-                        System.err.println("Invalid input. Try again.");
-                        main(args);
+                System.out.println("INSERT LENGTH VALUE:");
+                int length = Integer.parseInt(sc.nextLine());
+                if (length > 0) {
+                System.out.println("You typed: " + length);
+                    ArrayList<Integer> numbers = createArrayOfInt(length);
+                    doubledArrayOfInt(numbers);
+                    System.out.println();
+                    while (true) {
+                        System.out.println("CHOOSE AN OPTION:");
+                        System.out.println("1. Print numbers with even indexes");
+                        System.out.println("2. Print numbers with odd indexes");
+                        System.out.println("0. Exit");
+                        String input = sc.nextLine();
+                        switch (input) {
+                            case "0" -> {
+                                break loop;
+                            }
+                            case "1" -> printEvenOddIndex(numbers, true);
+                            case "2" -> printEvenOddIndex(numbers, false);
+                            default -> System.err.println("Invalid input. Try again.");
+                        }
                     }
+                } else {
+                    System.err.println("Error: min value allowed = 1");
                 }
-            } else {
-                System.err.println("Error: min value allowed = 1");
-                main(args);
+            } catch (NumberFormatException ex) {
+                System.err.println("Error: not a number. Try again.");
+                ex.printStackTrace();
             }
-        } catch (NumberFormatException ex) {
-            System.err.println("Error: not a number. Try again.");
-            main(args);
         }
 
         sc.close();
@@ -49,7 +53,6 @@ public class Main {
             result.add(rnd.nextInt(0, 101));
         }
         Collections.sort(result);
-
         System.out.println();
         System.out.println("New array of numbers:");
         System.out.println(result);
