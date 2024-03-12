@@ -30,7 +30,7 @@ public class Contacts {
         for (String name : contactList.keySet()) {
             if (phoneNumber.equals(contactList.get(name))) result = "Contact found - " + name + ": " + contactList.get(name);
         }
-        System.out.println(!result.isEmpty() ? result : "Contact not found.");
+        System.out.println(!result.isBlank() ? result : "Contact not found.");
     }
 
     public void browseContacts() {
